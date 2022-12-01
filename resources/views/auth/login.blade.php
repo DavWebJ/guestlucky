@@ -19,7 +19,7 @@
                         <div class="block-content block-content-full px-lg-5 px-xl-6 py-4 py-md-5 py-lg-6 bg-white">
                             <!-- Header -->
                             <div class="mb-2 text-center">
-                                <a class="link-fx font-w700 font-size-h1" href="index.html">
+                                <a class="link-fx font-w700 font-size-h1" href="{{route('home')}}">
                                     <span class="text-dark">Guest</span><span class="text-primary">Lucky</span>
                                 </a>
                                 <p class="text-uppercase font-w700 font-size-sm text-muted">Log In</p>

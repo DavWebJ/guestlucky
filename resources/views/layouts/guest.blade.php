@@ -18,7 +18,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
             <!-- Scripts -->
-        <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
+
 </head>
     </head>
     <body>
@@ -26,13 +26,7 @@
       <div id="page-container">
           <!-- Main Container -->
           <main id="main-container">
-              <!-- Page Content -->
-
-                {{ $slot ?? "" }}
-                @yield('404')
-                @yield('403')
-                @yield('302')
-                @yield('500')
+           {{ $slot ?? '' }}
         </main>
             <!-- END Main Container -->
       </div>
@@ -42,8 +36,8 @@
         <!-- Dashmix Core JS -->
          <script src="{{ asset('admin/js/js.cookie.min.js') }}"></script> 
         <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script> 
-        <script src="{{ asset('dashmix/js/dashmix.app.js') }}"></script>
-        <script src="{{ asset('dashmix/js/laravel.app.js') }}"></script> 
+        <script src="{{ asset('js/dashmix.app.js') }}"></script>
+        <script src="{{ asset('js/laravel.app.js') }}"></script> 
 
         @livewireScripts
     </body>

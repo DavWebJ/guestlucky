@@ -521,6 +521,7 @@
             @yield('admin.staflist')
             @yield('admin.customerlist')
             @yield('admin.create')
+
             </main>
             <!-- END Main Container -->
         </div>

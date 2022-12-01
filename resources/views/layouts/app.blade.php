@@ -516,6 +516,7 @@
             <main id="main-container">
             {{ $slot ?? '' }}
             @yield('dashboard')
+
             </main>
             <!-- END Main Container -->
         </div>

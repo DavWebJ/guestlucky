@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\Staf\StafController;
 
 /*
@@ -16,9 +17,7 @@ use App\Http\Controllers\Staf\StafController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/',[MainController::class,'index'])->name('home');
 
 
 
