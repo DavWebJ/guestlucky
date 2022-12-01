@@ -18,7 +18,7 @@ use App\Http\Controllers\Staf\StafController;
 */
 
 Route::get('/',[MainController::class,'index'])->name('home');
-
+Route::get('/switch',[MainController::class,'switch'])->name('switch');
 
 
 

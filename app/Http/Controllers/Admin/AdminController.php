@@ -160,7 +160,7 @@ class AdminController extends Controller
 
     public function updateProfil()
     {
-        return view('admin.profil.profil');
+        return view('profile.show');
     }
 
     public function changestatus(Request $request)
