@@ -41,5 +41,15 @@ class DatabaseSeeder extends Seeder
             'role_id' => '1',
 
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'sebBangkok',
+            'email'=> 'davidfriquet27@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('michelseb'),
+            'job'=>'admin 2 du site',
+            'role_id' => '1',
+
+        ]);
     }
 }
