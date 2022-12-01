@@ -12,8 +12,8 @@
             {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
         </div>
 
-        <div class="mt-5">
-            <x-jet-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
+        <div class="mt-2">
+            <x-jet-danger-button class="btn btn-hero-danger" wire:click="confirmUserDeletion" wire:loading.attr="disabled">
                 {{ __('Delete Account') }}
             </x-jet-danger-button>
         </div>
@@ -40,10 +40,10 @@
 
             <x-slot name="footer">
                 <x-jet-secondary-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
+                    {{ __('Nevermind') }}
                 </x-jet-secondary-button>
 
-                <x-jet-danger-button class="ml-3" wire:click="deleteUser" wire:loading.attr="disabled">
+                <x-jet-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
                     {{ __('Delete Account') }}
                 </x-jet-danger-button>
             </x-slot>

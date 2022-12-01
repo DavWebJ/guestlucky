@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +17,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        //création des roles utilisateurs fake
+
+
+        $role = new Role();
+        $role->role = 'admin';
+        $role->save();
+
+        $role = new Role();
+        $role->role = 'staf';
+        $role->save();
+
+        $role = new Role();
+        $role->role = 'customer';
+        $role->save();
+
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email'=> 'david.friquet@zohomail.eu',
+            'email_verified_at' => now(),
+            'password' => Hash::make('BlackPearl2022%'),
+            'job'=>'admin du site',
+            'role_id' => '1',
+
+        ]);
     }
 }
