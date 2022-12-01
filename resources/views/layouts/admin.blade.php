@@ -13,7 +13,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css'/>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.css'/>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" /> -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" />
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
@@ -275,37 +275,37 @@
                                     <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
                                 </a>
                             </li>
-                            <li class="nav-main-heading">Various</li>
+                            <li class="nav-main-heading">Admin Stats</li>
                             <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
                                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                                    <i class="nav-main-link-icon fa fa-lightbulb"></i>
-                                    <span class="nav-main-link-name">Examples</span>
+                                    <i class="nav-main-link-icon fa fa-list"></i>
+                                    <span class="nav-main-link-name">List</span>
                                 </a>
                                 <ul class="nav-main-submenu">
                                     <li class="nav-main-item">
-                                        <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">
-                                            <span class="nav-main-link-name">DataTables</span>
+                                        <a class="nav-main-link{{ request()->is('pages/datatables') ? ' active' : '' }}" href="{{route('admin.list')}}">
+                                            <span class="nav-main-link-name">Admin List</span>
                                         </a>
                                     </li>
                                     <li class="nav-main-item">
-                                        <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">
-                                            <span class="nav-main-link-name">Slick Slider</span>
+                                        <a class="nav-main-link{{ request()->is('pages/slick') ? ' active' : '' }}" href="{{route('staf.list')}}">
+                                            <span class="nav-main-link-name">Staf List</span>
                                         </a>
                                     </li>
                                     <li class="nav-main-item">
-                                        <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
-                                            <span class="nav-main-link-name">Blank</span>
+                                        <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{route('customer.list')}}">
+                                            <span class="nav-main-link-name">Customer List</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-main-heading">More</li>
-                            <li class="nav-main-item">
+                            <li class="nav-main-heading">Feature Actions...</li>
+                            <!-- <li class="nav-main-item">
                                 <a class="nav-main-link" href="/">
                                     <i class="nav-main-link-icon fa fa-globe"></i>
                                     <span class="nav-main-link-name">Landing</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <!-- END Side Navigation -->
@@ -517,7 +517,9 @@
             <main id="main-container">
             {{ $slot ?? '' }}
             @yield('admin.dashboard')
-            @yield('admin.index')
+            @yield('admin.adminlist')
+            @yield('admin.staflist')
+            @yield('admin.customerlist')
             @yield('admin.create')
             </main>
             <!-- END Main Container -->

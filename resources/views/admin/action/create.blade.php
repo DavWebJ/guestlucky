@@ -1,19 +1,26 @@
 @extends('layouts.admin')
 
 @section('admin.create')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">dashboard admin</a></li>
-                        <li class="breadcrumb-item active">créer un super admin</li>
+  <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2"></h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Create new admin</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-
-        <x-jet-authentication-card>
+                </nav>
+            </div>
+       </div>
+    </div>
+    <!-- END Hero -->
+        <!-- Page Content -->
+    <div class="content">
+        <!-- Info -->
+       <div class="block">
+            <div class="block-content">
+                    <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
@@ -23,42 +30,70 @@
         <form method="POST" action="{{ route('admin.store') }}">
             @csrf
             @include('includes.errors')
-            <input hidden type="text" id="role_id" name="role_id" value="1">
-            <div>
-                <x-jet-label for="prenom" value="{{ __('Prénom du super admin') }}" />
-                <x-jet-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')" required autofocus autocomplete="prenom" placeholder="Admin" />
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="name" name="name" :value="old('name')" required autofocus placeholder="Admin name">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-user-circle"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div>
-                <x-jet-label for="name" value="{{ __('nom de famille du super admin') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Super-Admin" />
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="email" class="form-control" id="email" name="email" :value="old('email')" required autofocus placeholder="Email">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required placeholder="admin@super-admin.fr"/>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="password" id="password" class="form-control" name="password" required autocomplete="new-password" placeholder="Password">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-asterisk"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <span class="muted text-cool-gray-600">8 caractère minimum contenant 1 majuscule et 1 chiffre</span>
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" placeholder="Password1234"/>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-asterisk"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <div class="form-group">
+                <div class="input-group">
+                    
+                    <input type="text" id="role_id" class="form-control" value="1" name="role_id" required readonly>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <label for="role_id">role admin</label>
+                        </span>
+                    </div>
+                </div>
             </div>
-
             @error('role_id')
                 <span class="text-red-400 text-sm block">{{ $message }}</span>
             @enderror
             <div class="flex items-center justify-end mt-4">
-
                 <x-jet-button class="ml-4">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>
+            </div>
+        </div> 
+        <!-- END Info -->
     </div>
+    <!-- END Page Content -->
 @endsection

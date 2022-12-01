@@ -66,7 +66,7 @@ class AdminController extends Controller
             // 'lastcomment'=>$last_comment
         ]);
     }
-    public function index()
+    public function adminlist()
     {
         $admin = DB::table('users')->
             where('role_id','=','1')
@@ -75,7 +75,7 @@ class AdminController extends Controller
         if(Auth::user()->role_id == 1)
         {
 
-            return view('admin.index',compact('admin'));
+            return view('admin.adminlist',compact('admin'));
 
         }
         else
@@ -84,7 +84,47 @@ class AdminController extends Controller
         }
     }
 
-        public function create()
+    public function staflist()
+    {
+        $staf = DB::table('users')->
+            where('role_id','=','2')
+            ->get();
+  
+        if(Auth::user()->role_id == 1)
+        {
+
+            return view('admin.staflist',compact('staf'));
+
+        }
+        else
+        {
+           return abort(404);
+        }
+    }
+
+    public function customerlist()
+    {
+        $customer = DB::table('users')->
+            where('role_id','=','1')
+            ->get();
+  
+        if(Auth::user()->role_id == 1)
+        {
+
+            return view('admin.customerlist',compact('customer'));
+
+        }
+        else
+        {
+           return abort(404);
+        }
+    }
+
+
+
+
+
+    public function create()
     {
 
          return view('admin.action.create');
@@ -99,7 +139,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-       
+       $role_id = '1';
         Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -111,7 +151,7 @@ class AdminController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'role_id' => $request['role_id'],
+            'role_id' => $role_id,
         ]);
         
         $request->session()->flash('success', 'L\'admin a été créé avec succès');

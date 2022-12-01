@@ -26,7 +26,9 @@ Route::get('/', function () {
 // admin group routes
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum',config('jetstream.auth_session'),'verified','admin']], function(){
 
-    Route::get('list',[AdminController::class,'index'])->name('admin.list');
+    Route::get('list',[AdminController::class,'adminlist'])->name('admin.list');
+    Route::get('staf/list',[AdminController::class,'staflist'])->name('staf.list');
+    Route::get('customer/list',[AdminController::class,'customerlist'])->name('customer.list');
     Route::get('/add-super',[AdminController::class,'create'])->name('admin.create');
     Route::post('/create-super',[AdminController::class,'store'])->name('admin.store');
     Route::get('/user',[UserController::class,'index'])->name('user.index');

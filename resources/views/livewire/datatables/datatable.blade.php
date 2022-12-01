@@ -23,7 +23,7 @@
             </div>
 
             @if($this->activeFilters)
-                <span class="text-xl text-blue-400 uppercase">@lang('Filter active')</span>
+                <span class="text-xl text-blue-400 uppercase">filtre</span>
             @endif
 
             <div class="flex flex-wrap items-center space-x-1">
@@ -194,7 +194,7 @@
         </div>
 
         @unless($this->hidePagination)
-            <div class="max-w-screen bg-white @unless($complex) rounded-b-lg @endunless border-4 border-t-0 border-b-0 @if($this->activeFilters) border-blue-500 @else border-transparent @endif">
+            <div class="max-w-screen mt-4 bg-white @unless($complex) rounded-b-lg @endunless border-4 border-t-0 border-b-0 @if($this->activeFilters) border-blue-500 @else border-transparent @endif">
                 <div class="items-center justify-between p-2 sm:flex">
                     {{-- check if there is any data --}}
                     @if(count($this->results))

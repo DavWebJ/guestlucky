@@ -2,42 +2,41 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 
-class UserTable extends LivewireDatatable
+class CustomersTable extends LivewireDatatable
 {
     public $model = User::class;
 
     public function builder()
     {
         return User::query()
-        ->with(['role']);
-        
+        ->where('role_id','=','3');
     }
     public function columns()
     {
-        return [
+                return [
 
             Column::name('id')
-                 ->label('#')
-                 ->defaultSort('asc'),
+                 ->label('ID')
+                 ->defaultSort('asc')
+                 ->filterable(),
+
+
+            Column::name('name')
+                ->label('Nom')
+                ->defaultSort('asc')
+                ->filterable(),
 
             Column::name('email')
                 ->label('Email')
+                ->defaultSort('asc')
                 ->filterable(),
-
-            Column::name('name')
-                ->label('Nom'),
-            Column::name('role.role')
-                ->label('Rôle'),
+                
+                Column::delete()
 
         ];
     }
-
-
 }
-
