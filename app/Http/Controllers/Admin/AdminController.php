@@ -29,42 +29,19 @@ class AdminController extends Controller
     {
        
         $now = Carbon::now('Europe/Paris');
-        // $order = Order::all();
-        // $ordertoday = Order::where('created_at','>=', Carbon::now())->count();
-        // $comment = Rating::where('status','=',0)->count();
-        // $product = Product::all();
-        // $emptystock = $product->where('stock','=',0)->count();
-        // $emptyproduct = Product::where('stock','=',0)->get();
-        $admin = User::where('role_id','!=', '1')->get();
-        $newadmin = User::where('role_id','=', '1')->where('created_at','>=',Carbon::now())->count();
-        $staf = User::where('role_id','2')->get();
-        $currentstaf = User::where('role_id','=', '2')->count();
-        $customer = User::where('role_id','3')->get();
-        // $totalcomment = Rating::where('status','=',1)->count();
-        // $totals = DB::table('orders')->pluck('total');
-        // $total_orders = 0;
-        // foreach ($totals as $total) {
-        //     $total_orders+= $total;
-            
-        // }
-        // $last_comment = Rating::latest()->first();
-        return view('admin.dashboard',
-        [
-            // 'order' => $order,
-            // 'product' => $product,
-            'admin' => $admin,
-            'staf' => $staf,
-            'customer' => $customer,
-            // 'comment' => $comment,
-            // 'emptystock' => $emptystock,
-            // 'emptyproduct' =>$emptyproduct,
-            // 'ordertoday' => $ordertoday,
-            // 'totalcomment'=>$totalcomment,
-            'newadmin'=>$newadmin,
-            'currentstaf'=> $currentstaf,
-            // 'total'=>$total_orders,
-            // 'lastcomment'=>$last_comment
-        ]);
+          if(Auth::user()->role_id == 1)
+          {
+            return view('admin.dashboard');
+          }
+          else if(Auth::user()->role_id == 2)
+          {
+              return view('staf.dashboard');
+          }else
+          {
+             return view('dashboard');
+          }
+
+          
     }
     public function adminlist()
     {
@@ -158,7 +135,7 @@ class AdminController extends Controller
         return redirect()->to('admin/list');
     }
 
-    public function updateProfil()
+    public function show()
     {
         return view('profile.show');
     }

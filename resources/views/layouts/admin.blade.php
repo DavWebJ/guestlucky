@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>admin</title>
+    <title>DashBoard</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
     <!-- Theme style -->
@@ -265,13 +265,15 @@
 
                 <!-- Sidebar Scrolling -->
                 <div class="js-sidebar-scroll">
-                <!-- Side Navigation -->
+                    @auth
+                        @if (auth()->user()->role_id == 1)
+                            <!-- Side Navigation -->
                     <div class="content-side content-side-full">
                         <ul class="nav-main">
                             <li class="nav-main-item">
                                 <a class="nav-main-link" href="{{route('admin.dashboard')}}">
                                     <i class="nav-main-link-icon fa fa-location-arrow"></i>
-                                    <span class="nav-main-link-name">Dashboard</span>
+                                    <span class="nav-main-link-name">Admin Dashboard</span>
                                     <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
                                 </a>
                             </li>
@@ -309,6 +311,55 @@
                         </ul>
                     </div>
                     <!-- END Side Navigation -->
+                        @elseif(auth()->user()->role_id == 2)
+                            <!-- Side Navigation -->
+                    <div class="content-side content-side-full">
+                        <ul class="nav-main">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{route('staf.dashboard')}}">
+                                    <i class="nav-main-link-icon fa fa-location-arrow"></i>
+                                    <span class="nav-main-link-name">Staf Dashboard</span>
+                                    <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-heading">Actions</li>
+                            
+                            <li class="nav-main-heading">Feature Actions...</li>
+                            <!-- <li class="nav-main-item">
+                                <a class="nav-main-link" href="/">
+                                    <i class="nav-main-link-icon fa fa-globe"></i>
+                                    <span class="nav-main-link-name">Landing</span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <!-- END Side Navigation -->
+                        @else
+                        <!-- Side Navigation -->
+                    <div class="content-side content-side-full">
+                        <ul class="nav-main">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{route('admin.dashboard')}}">
+                                    <i class="nav-main-link-icon fa fa-location-arrow"></i>
+                                    <span class="nav-main-link-name">Customer Dashboard</span>
+                                    <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-heading">Actions</li>
+
+                            <li class="nav-main-heading">Feature Actions...</li>
+                            <!-- <li class="nav-main-item">
+                                <a class="nav-main-link" href="/">
+                                    <i class="nav-main-link-icon fa fa-globe"></i>
+                                    <span class="nav-main-link-name">Landing</span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <!-- END Side Navigation -->
+                        @endif
+                
+                    @endauth
                 </div>
                 <!-- END Sidebar Scrolling -->
             </nav>
@@ -348,8 +399,9 @@
                                 <div class="bg-primary-darker rounded-top font-w600 text-white text-center p-3">
                                    Menu
                                 </div>
+                                @if (auth()->user()->role_id == 1)
                                 <div class="p-2">
-                                    <a class="dropdown-item" href="{{route('admin.updateprofile')}}">
+                                    <a class="dropdown-item" href="{{route('admin.show')}}">
                                         <i class="far fa-fw fa-user mr-1"></i> Profile
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
@@ -378,6 +430,69 @@
                                         </a>
                                         </form>
                                 </div>
+                                @elseif (auth()->user()->role_id == 2)
+                                <div class="p-2">
+                                    <a class="dropdown-item" href="{{route('staf.show')}}">
+                                        <i class="far fa-fw fa-user mr-1"></i> Profile
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span><i class="far fa-fw fa-envelope mr-1"></i> Inbox</span>
+                                        <span class="badge badge-primary">3</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="far fa-fw fa-file-alt mr-1"></i> Invoices
+                                    </a>
+                                    <div role="separator" class="dropdown-divider"></div>
+
+                                    <!-- Toggle Side Overlay -->
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
+                                        <i class="fas fa-fw fa-gear mr-1"></i> Settings
+                                    </a>
+                                    <!-- END Side Overlay -->
+
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                            <i class="nav-icon fas fa-sign-out-alt px-2"></i>{{ __('Logout') }}
+                                        </a>
+                                        </form>
+                                </div>
+                                @else
+                                <div class="p-2">
+                                    <a class="dropdown-item" href="{{route('customer.show')}}">
+                                        <i class="far fa-fw fa-user mr-1"></i> Profile
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                        <span><i class="far fa-fw fa-envelope mr-1"></i> Inbox</span>
+                                        <span class="badge badge-primary">3</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="far fa-fw fa-file-alt mr-1"></i> Invoices
+                                    </a>
+                                    <div role="separator" class="dropdown-divider"></div>
+
+                                    <!-- Toggle Side Overlay -->
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
+                                        <i class="fas fa-fw fa-gear mr-1"></i> Settings
+                                    </a>
+                                    <!-- END Side Overlay -->
+
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                            <i class="nav-icon fas fa-sign-out-alt px-2"></i>{{ __('Logout') }}
+                                        </a>
+                                        </form>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <!-- END User Dropdown -->
@@ -460,9 +575,9 @@
 
                         <!-- Toggle Side Overlay -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        <button type="button" class="btn btn-dual" data-toggle="layout" data-action="side_overlay_toggle">
+                        <!-- <button type="button" class="btn btn-dual" data-toggle="layout" data-action="side_overlay_toggle">
                             <i class="fa fa-fw fa-wrench"></i>
-                        </button>
+                        </button> -->
                         <!-- END Toggle Side Overlay -->
                     </div>
                     <!-- END Right Section -->

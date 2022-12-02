@@ -9,11 +9,14 @@ class CustomerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum',config('jetstream.auth_session'),'verified']);
+        $this->middleware('admin');
     }
 
-    public function dashboard()
+
+    public function show()
     {
-        return view('dashboard');
+          
+        return view('profile.show');
+
     }
 }

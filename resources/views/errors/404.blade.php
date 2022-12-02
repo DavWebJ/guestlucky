@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>404</title>
 
         <meta name="description" content="Dashmix - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
@@ -50,6 +50,12 @@
                                                 <i class="fa fa-arrow-left mr-1"></i> Back to login page
                                             </a>
                                         @endguest
+
+                                        @auth
+                                            <a class="btn btn-hero-secondary" href="{{ route('switch') }}">
+                                                <i class="fa fa-arrow-left mr-1"></i> Back to your dashboard
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

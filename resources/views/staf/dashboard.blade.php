@@ -1,4 +1,4 @@
-<x-staf-layout>
+<x-admin-layout>
   <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
@@ -24,4 +24,4 @@
         <!-- END Info -->
     </div>
     <!-- END Page Content -->
-</x-staf-layout>
+</x-admin-layout>

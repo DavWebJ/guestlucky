@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <div class="bg-body-light">
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -23,4 +23,4 @@
         <!-- END Info -->
     </div>
     <!-- END Page Content -->
-</x-app-layout>
+</x-admin-layout>

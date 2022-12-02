@@ -22,17 +22,10 @@ class StafController extends Controller
     use PasswordValidationRules;
     public function __construct()
     {
-        $this->middleware('staf');
+        $this->middleware('admin');
     }
 
-    public function dashboard()
-    {
-        
-
-        return view('staf.dashboard');
-    }
-
-    public function updateProfil()
+    public function show()
     {
           
         return view('profile.show');

@@ -31,21 +31,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum',config('jetst
     Route::get('/add-super',[AdminController::class,'create'])->name('admin.create');
     Route::post('/create-super',[AdminController::class,'store'])->name('admin.store');
     Route::get('/user',[UserController::class,'index'])->name('user.index');
-    Route::get('/update-profile',[AdminController::class,'updateProfil'])->name('admin.updateprofile');
+    Route::get('/update-profile',[AdminController::class,'show'])->name('admin.show');
 
 });
 
 
 // staf group routes
-Route::group(['prefix' => 'staf', 'middleware' => ['auth:sanctum',config('jetstream.auth_session'),'verified','staf']], function(){
+Route::group(['prefix' => 'staf', 'middleware' => ['auth:sanctum',config('jetstream.auth_session'),'verified','admin']], function(){
     
-    Route::get('update-profile',[StafController::class,'updateProfil'])->name('staf.updateprofile');
+    Route::get('update-profile',[StafController::class,'show'])->name('staf.show');
 
 });
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','staf'])->get('staf/dashboard',[StafController::class,'dashboard'])->name('staf.dashboard');
+// staf group routes
+Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum',config('jetstream.auth_session'),'verified','admin']], function(){
+    
+    Route::get('/show',[CustomerController::class,'show'])->name('customer.show');
+
+});
+
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','admin'])->get('staf/dashboard',[AdminController::class,'dashboard'])->name('staf.dashboard');
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','admin'])->get('admin/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->get('dashboard',[CustomerController::class,'dashboard'])->name('dashboard');
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','admin'])->get('customer/dashboard',[AdminController::class,'dashboard'])->name('customer.dashboard');
+
+
+
 
 
 

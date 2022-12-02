@@ -50,6 +50,12 @@
                                                 <i class="fa fa-arrow-left mr-1"></i> Back to login page
                                             </a>
                                         @endguest
+
+                                        @auth
+                                            <a class="btn btn-hero-secondary" href="{{ route('switch') }}">
+                                                <i class="fa fa-arrow-left mr-1"></i> Back to your dashboard
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

@@ -61,6 +61,7 @@
                     </ul>
                 </div>
             @endif
+            
             <div class="form-group">
                 <div class="input-group">
                     <input type="text" class="form-control" id="name" name="name" wire:model.defer="state.name" autocomplete="name" autofocus>
@@ -94,11 +95,6 @@
             <div class="alert alert-success" role="alert">
                 <p class="mb-0">{{ __('Saved with success.') }}</p>
             </div>     
-            
         </x-jet-action-message>
-
-        <!-- <x-jet-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-jet-button> -->
     </x-slot>
 </x-jet-form-section>

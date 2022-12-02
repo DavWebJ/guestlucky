@@ -32,13 +32,27 @@
       </div>
         <!-- END Page Container -->
 
-        @stack('modals')
-        <!-- Dashmix Core JS -->
-         <script src="{{ asset('admin/js/js.cookie.min.js') }}"></script> 
-        <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script> 
-        <script src="{{ asset('js/dashmix.app.js') }}"></script>
+        <script src="{{ mix('/js/dashmix.app.js') }}"></script>
         <script src="{{ asset('js/laravel.app.js') }}"></script> 
-
-        @livewireScripts
+        <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
+    <!-- Page JS Plugins -->
+    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script>
+    <!-- Page JS Code -->
+    <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
+<!-- REQUIRED SCRIPTS -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-maxlength/1.9.1/bootstrap-maxlength.min.js' ></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@stack('modals')
+    @livewireScripts
     </body>
 </html>

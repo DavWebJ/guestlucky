@@ -27,14 +27,14 @@ class MainController extends Controller
                         return redirect()->route('staf.dashboard');
                         break;
                     case '3':
-                        return redirect()->route('dashboard');
+                        return redirect()->route('customer.dashboard');
                         break;
                 default:
-                  return abort(403);
+                  
                     break;
             }
        }else{
-        return redirect()->route('/');
+        return redirect()->route('403');
        }
     }
 }

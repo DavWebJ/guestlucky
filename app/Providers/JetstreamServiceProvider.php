@@ -2,10 +2,15 @@
 
 namespace App\Providers;
 
-use App\Actions\Jetstream\DeleteUser;
-use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
+use App\Actions\Jetstream\DeleteUser;
+use App\Http\Responses\LoginResponse;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseContract;
+use App\Http\Responses\TwoFactorLoginResponse;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -32,9 +37,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
-        $this->callAfterResolving(BladeCompiler::class, function () {
-        Blade::component('components.success-button', 'jet-success-button');
-    });
+
     }
 
     /**
