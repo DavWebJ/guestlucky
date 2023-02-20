@@ -1,4 +1,11 @@
-<x-admin-layout>
+@extends('layouts.admin')
+@section('message.count')
+
+@endsection
+@section('unread')
+
+@endsection
+@section('admin.dashboard')
   <!-- Hero -->
     <div class="bg-body-light">
         <div class="content content-full">
@@ -16,12 +23,30 @@
         <!-- Page Content -->
     <div class="content">
         <!-- Info -->
-       <div class="block">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                 <h1 class="block-title">dernier appelle API: <span>il y à {{$diff ?? 'null'}} minutes </span></h1>
+            </div>
             <div class="block-content">
+                <p>
+                    @if ($diff < 5)<span class="text-danger small">vous devez attendre quelques minutes</span>@else <span class="text-success small">vous pouvez faire un call API</span> <a class="btn btn-success" href="{{route('admin.refresh')}}">refresh database</a>@endif
+                    
+                </p>
 
             </div>
-        </div> 
+        </div>
         <!-- END Info -->
+             <!-- Dynamic Table Full -->
+        <livewire:checkin-component/> 
+
     </div>
     <!-- END Page Content -->
-</x-admin-layout>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+
+    $(function () {
+
+    });
+
+</script>    
+@endsection

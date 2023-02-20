@@ -29,5 +29,9 @@ class UpdateUserPassword implements UpdatesUserPasswords
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+
+        $role_user = $user->with('role')->first();
+        $role = $role_user->role->role;
+        return redirect()->route($role.'.show');
     }
 }

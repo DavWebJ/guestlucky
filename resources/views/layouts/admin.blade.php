@@ -15,6 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" />
     <!-- Page JS Plugins CSS -->
+    @yield('css_message')
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -266,15 +267,14 @@
                 <!-- Sidebar Scrolling -->
                 <div class="js-sidebar-scroll">
                     @auth
-                        @if (auth()->user()->role_id == 1)
+                        @if(auth()->user()->role_id == 1)
                             <!-- Side Navigation -->
                     <div class="content-side content-side-full">
                         <ul class="nav-main">
                             <li class="nav-main-item">
                                 <a class="nav-main-link" href="{{route('admin.dashboard')}}">
-                                    <i class="nav-main-link-icon fa fa-location-arrow"></i>
+                                    <i class="nav-main-link-icon fa fa-user"></i>
                                     <span class="nav-main-link-name">Admin Dashboard</span>
-                                    <span class="nav-main-link-badge badge badge-pill badge-success">5</span>
                                 </a>
                             </li>
                             <li class="nav-main-heading">Admin Stats</li>
@@ -299,15 +299,20 @@
                                             <span class="nav-main-link-name">Customer List</span>
                                         </a>
                                     </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="{{route('properties.list')}}">
+                                            <span class="nav-main-link-name">Properties List</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-main-heading">Feature Actions...</li>
-                            <!-- <li class="nav-main-item">
-                                <a class="nav-main-link" href="/">
-                                    <i class="nav-main-link-icon fa fa-globe"></i>
-                                    <span class="nav-main-link-name">Landing</span>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{route('properties.create.propkey')}}">
+                                    <i class="nav-main-link-icon fa fa-key"></i>
+                                    <span class="nav-main-link-name">Create prop key</span>
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                     <!-- END Side Navigation -->
@@ -358,7 +363,6 @@
                     </div>
                     <!-- END Side Navigation -->
                         @endif
-                
                     @endauth
                 </div>
                 <!-- END Sidebar Scrolling -->
@@ -404,9 +408,9 @@
                                     <a class="dropdown-item" href="{{route('admin.show')}}">
                                         <i class="far fa-fw fa-user mr-1"></i> Profile
                                     </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('messages.index')}}">
                                         <span><i class="far fa-fw fa-envelope mr-1"></i> Inbox</span>
-                                        <span class="badge badge-primary">3</span>
+                                        <!-- <span class="badge badge-primary">@yield('message.count')</span> -->
                                     </a>
                                     <a class="dropdown-item" href="javascript:void(0)">
                                         <i class="far fa-fw fa-file-alt mr-1"></i> Invoices
@@ -415,6 +419,10 @@
 
                                     <!-- Toggle Side Overlay -->
                                     <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <a class="dropdown-item" href="{{route('token.show')}}">
+                                        <i class="fas fa-fw fa-key mr-1"></i> Manage API key/token
+                                    </a>
+                                    <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
                                         <i class="fas fa-fw fa-gear mr-1"></i> Settings
                                     </a>
@@ -500,72 +508,37 @@
                         <!-- Notifications Dropdown -->
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-fw fa-bell"></i>
-                                <span class="badge badge-secondary badge-pill">5</span>
+                                <i class="fa fa-fw fa-bell text-primary"></i>
+                                <!-- <span class="badge badge-success badge-pill">@yield('unread')</span> -->
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown">
                                 <div class="bg-primary-darker rounded-top font-w600 text-white text-center p-3">
-                                   Notifications
+                                   Messages
                                 </div>
-                                <ul class="nav-items my-2">
-                                    <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="mx-3">
-                                                <i class="fa fa-fw fa-check-circle text-success"></i>
-                                            </div>
-                                            <div class="media-body font-size-sm pr-2">
-                                                <div class="font-w600">App was updated to v5.6!</div>
-                                                <div class="text-muted font-italic">3 min ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="mx-3">
-                                                <i class="fa fa-fw fa-user-plus text-info"></i>
-                                            </div>
-                                            <div class="media-body font-size-sm pr-2">
-                                                <div class="font-w600">New Subscriber was added! You now have 2580!</div>
-                                                <div class="text-muted font-italic">10 min ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="mx-3">
-                                                <i class="fa fa-fw fa-times-circle text-danger"></i>
-                                            </div>
-                                            <div class="media-body font-size-sm pr-2">
-                                                <div class="font-w600">Server backup failed to complete!</div>
-                                                <div class="text-muted font-italic">30 min ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="mx-3">
-                                                <i class="fa fa-fw fa-exclamation-circle text-warning"></i>
-                                            </div>
-                                            <div class="media-body font-size-sm pr-2">
-                                                <div class="font-w600">You are running out of space. Please consider upgrading your plan.</div>
-                                                <div class="text-muted font-italic">1 hour ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="mx-3">
-                                                <i class="fa fa-fw fa-plus-circle text-primary"></i>
-                                            </div>
-                                            <div class="media-body font-size-sm pr-2">
-                                                <div class="font-w600">New Sale! + $30</div>
-                                                <div class="text-muted font-italic">2 hours ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <!-- <ul class="nav-items my-2">
+                                    @if ($messages ?? '')
+                                        @foreach ($messages as $message)
+                                        <li>
+                                            <a class="text-dark media py-2" href="{{ route('messages.show', ['message'=> $message]) }}">
+                                                <div class="mx-3">
+                                                    @if ($message->read == 1)
+                                                         <i class="fa fa-fw fa-envelope-open text-muted"></i>
+                                                    @else
+                                                         <i class="fa fa-fw fa-envelope text-muted"></i>
+                                                    @endif
+                                                   
+                                                </div>
+                                                <div class="media-body font-size-sm pr-2">
+                                                    <div class="font-w600">{{ Str::limit($message->message,$limit = 65, $end = '...')}}</div>
+                                                    <div class="text-muted font-italic">{{ \Carbon\Carbon::parse($message->time)->diffForHumans() }}</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    @endif
+                                </ul> -->
                                 <div class="p-2 border-top">
-                                    <a class="btn btn-light btn-block text-center" href="javascript:void(0)">
+                                    <a class="btn btn-light btn-block text-center" href="{{route('messages.index')}}">
                                         <i class="fa fa-fw fa-eye mr-1"></i> View All
                                     </a>
                                 </div>
@@ -618,16 +591,7 @@
 
                 <!-- Main Container -->
 
-            @if(Session::has('success'))
-            <script>
-                toastr.success("{{ Session::get('success') }}");
-            </script>
-            @endif
-            @if(Session::has('error'))
-            <script>
-                toastr.error("{{ Session::get('error') }}");
-            </script>
-            @endif
+
             <!-- Main Container -->
             <main id="main-container">
             {{ $slot ?? '' }}
@@ -636,7 +600,11 @@
             @yield('admin.staflist')
             @yield('admin.customerlist')
             @yield('admin.create')
-
+            @yield('admin.propkey')
+            @yield('token')
+            @yield('message')
+            @yield('messages')
+            @yield('booking')
             </main>
             <!-- END Main Container -->
         </div>
@@ -662,9 +630,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/tinymce.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@yield('js_message')
 @stack('modals')
 
     @livewireScripts
+    @if(Session::has('success'))
+            <script>
+               
+                toastr.success("{{ Session::get('success') }}");
+            </script>
+            @endif
+            @if(Session::has('error'))
+            <script>
+              
+               toastr.error("{{ Session::get('error') }}");
+            </script>
+    @endif
     <script>     
         $(function () {
             $('.js-maxlength').maxlength({

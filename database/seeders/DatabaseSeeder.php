@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\Token;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('BlackPearl2022%'),
             'job'=>'admin du site',
             'role_id' => '1',
+            
 
         ]);
 
@@ -49,7 +51,13 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('michelseb'),
             'job'=>'admin 2 du site',
             'role_id' => '1',
+        
 
         ]);
+
+        $token = new Token();
+        $token->apikey = 'GzPd5xF6eTiLpA6YuZ}%_j[N{uOklyh$';
+        $token->user_id = '1';
+        $token->save();
     }
 }

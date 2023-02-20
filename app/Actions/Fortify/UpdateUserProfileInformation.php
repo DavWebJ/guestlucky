@@ -37,6 +37,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
             ])->save();
         }
+        $role_user = $user->with('role')->first();
+        $role = $role_user->role->role;
+        return redirect()->route($role.'.show');
     }
 
     /**
@@ -55,5 +58,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->save();
 
         $user->sendEmailVerificationNotification();
+        
     }
 }

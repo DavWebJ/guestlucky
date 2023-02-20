@@ -1,10 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Staf\StafController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Customer\CustomerController;
+use App\Models\Booking;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,23 +35,37 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum',config('jetst
     Route::get('customer/list',[AdminController::class,'customerlist'])->name('customer.list');
     Route::get('/add-super',[AdminController::class,'create'])->name('admin.create');
     Route::post('/create-super',[AdminController::class,'store'])->name('admin.store');
-    Route::get('/user',[UserController::class,'index'])->name('user.index');
-    Route::get('/update-profile',[AdminController::class,'show'])->name('admin.show');
+    Route::get('/profil',[AdminController::class,'show'])->name('admin.show');
+    Route::get('/properties',[AdminController::class,'showProperties'])->name('properties.list');
+    Route::get('/create-prop-key',[PropertyController::class,'createPropKey'])->name('properties.create.propkey');
+    Route::post('/create-prop-key',[PropertyController::class,'storeKey'])->name('properties.store.propkey');
+    Route::get('/manage-token',[AdminController::class,'showTokenManger'])->name('token.show');
+    Route::get('/getBookings',[AdminController::class,'getBookings'])->name('getBookings');
+    Route::get('/save-properties',[MainController::class,'SaveProperties']);
+    Route::post('/create-token',[AdminController::class,'storetoken'])->name('admin.store.token');
+    Route::get('/refresh',[AdminController::class,'resetAll'])->name('admin.refresh');
+    Route::get('booking/{booking}',[BookingController::class,'show'])->name('admin.booking.show');
+    Route::post('send-messge',[AdminController::class,'sendmessages'])->name('admin.send');
+    Route::get('/invoices',[AdminController::class,'getBookingsInvoices']);
+    Route::resources([
+        'messages' => MessageController::class,
+    ]);
 
 });
+
 
 
 // staf group routes
 Route::group(['prefix' => 'staf', 'middleware' => ['auth:sanctum',config('jetstream.auth_session'),'verified','admin']], function(){
     
-    Route::get('update-profile',[StafController::class,'show'])->name('staf.show');
+    Route::get('/profil',[StafController::class,'show'])->name('staf.show');
 
 });
 
 // staf group routes
 Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum',config('jetstream.auth_session'),'verified','admin']], function(){
     
-    Route::get('/show',[CustomerController::class,'show'])->name('customer.show');
+    Route::get('/profil',[CustomerController::class,'show'])->name('customer.show');
 
 });
 
@@ -57,7 +76,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','a
 
 
 
-
+// seed table properties
 
 
 

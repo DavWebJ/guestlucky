@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('role_id')->default('3')->constrained("roles");
             $table->string('job')->nullable();
+            $table->dateTime('lastcall')->nullable();
+            $table->boolean('can_refresh_token')->default(false);
             $table->timestamps();
         });
     }

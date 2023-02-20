@@ -72,7 +72,16 @@
             </div>
             <div class="form-group">
                 <div class="input-group">
-                    
+                    <input type="text" id="apikey" class="form-control" name="apikey" required autocomplete="apikey" placeholder="paste your beds24 apikey here">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-key"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
                     <input type="text" id="role_id" class="form-control" value="1" name="role_id" required readonly>
                     <div class="input-group-append">
                         <span class="input-group-text">
